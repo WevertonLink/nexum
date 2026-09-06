@@ -64,6 +64,28 @@ function shellHtml({ jsEntry, cssEntry }) {
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Source+Sans+3:ital,wght@0,400;0,500;0,600;1,400&display=swap">${css}
+    <script>
+      // Surface bootstrap errors on-screen (there is no dev console on
+      // installed PWAs; a silent blank page is unshippable). Removed once
+      // the app mounts (first React render clears document children).
+      (function () {
+        function paint(kind, msg) {
+          try {
+            var pre = document.createElement("pre");
+            pre.style.cssText = "position:fixed;inset:0;margin:0;padding:16px;background:#faf7f2;color:#7a1a1a;font:12px/1.4 ui-monospace,SFMono-Regular,Menlo,monospace;white-space:pre-wrap;overflow:auto;z-index:2147483647";
+            pre.textContent = "[" + kind + "]\\n" + msg;
+            (document.body || document.documentElement).appendChild(pre);
+          } catch (_) {}
+        }
+        window.addEventListener("error", function (e) {
+          paint("error", (e.message || String(e.error)) + "\\n@ " + (e.filename || "?") + ":" + (e.lineno || 0));
+        });
+        window.addEventListener("unhandledrejection", function (e) {
+          var r = e.reason;
+          paint("unhandledrejection", r && (r.stack || r.message) ? (r.stack || r.message) : String(r));
+        });
+      })();
+    </script>
     <script type="module" src="${base}assets/${jsEntry}"></script>
   </head>
   <body></body>
