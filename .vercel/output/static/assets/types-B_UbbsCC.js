@@ -1,0 +1,1 @@
+var e={molecular:`Nível molecular`,cellular:`Nível celular`,circuit:`Nível de circuito`,system:`Nível de sistema`,cognitive:`Nível cognitivo`,behavioral:`Nível comportamental`,social:`Nível social`},t={well_established:`Bem estabelecido`,strong_evidence:`Evidência forte`,supported_model:`Modelo sustentado`,active_research:`Pesquisa ativa`,hypothesis:`Hipótese`};export{e as n,t};

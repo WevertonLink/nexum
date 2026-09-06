@@ -1,0 +1,9 @@
+../neurolab-v2/
+attachments/
+screenshots/
+artifacts/
+.grok/
+node_modules/.cache
+.vscode/
+.idea/
+*.log

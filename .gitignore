@@ -1,0 +1,16 @@
+node_modules/
+.output/
+dist/
+.nitro/
+.cache/
+.vite/
+.DS_Store
+*.log
+.env
+.env.local
+.env.*.local
+coverage/
+artifacts/
+attachments/
+screenshots/
+.grok/
