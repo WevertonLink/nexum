@@ -15,6 +15,14 @@ import { StrictMode, startTransition } from "react";
 import { createRoot } from "react-dom/client";
 import { StartClient } from "@tanstack/react-start/client";
 
+// The build-pages shell paints stylesheet + preload links directly into
+// <head>. React's reconciler chokes ("Cannot set properties of undefined
+// (setting 't')") when createRoot(document) tries to re-parent an existing
+// <html> that it didn't originate. Strip document children first so React
+// gets a blank canvas; __root.tsx re-renders the head links from JSX and
+// the browser reuses the already-downloaded CSS from its cache.
+while (document.firstChild) document.removeChild(document.firstChild);
+
 startTransition(() => {
   createRoot(document).render(
     <StrictMode>
